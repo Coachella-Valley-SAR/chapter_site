@@ -834,9 +834,9 @@
           <a href="#">Our Chapter ▾</a>
           <div class="dropdown">
             <a href="#" onclick="showPage('about')">History &amp; Mission</a>
-            <a href="#" onclick="showPage('about'); setTimeout(()=>{document.querySelectorAll('#page-about .tab-btn').forEach(b=>b.classList.remove('active')); document.querySelectorAll('#page-about .tab-content').forEach(t=>t.classList.remove('active')); document.querySelector('#page-about .tab-btn[onclick*=tab-officers]').classList.add('active'); document.getElementById('tab-officers').classList.add('active');},10)">Chapter Officers</a>
+            <a href="#" onclick="showPageTab('about','tab-officers')">Chapter Officers</a>
             <a href="#" onclick="showPage('members')">Chapter Members</a>
-            <a href="#" onclick="showPage('about')">Chapter Photos</a>
+            <a href="#" onclick="showPageTab('about','tab-patriots')">Our Patriots</a>
           </div>
         </li>
         <li>
@@ -846,7 +846,6 @@
             <a href="#" onclick="showPage('programs')">Boy / Eagle Scouts</a>
             <a href="#" onclick="showPage('programs')">Youth Awards & Contests</a>
             <a href="#" onclick="showPage('programs')">Patriot Grave Marking</a>
-            <a href="#" onclick="showPage('programs')">Local Events</a>
           </div>
         </li>
         <li><a href="#" onclick="showPage('news')">News</a></li>
@@ -1102,6 +1101,7 @@
         <button class="tab-btn" onclick="switchTab(this,'tab-mission')">Our Mission</button>
         <button class="tab-btn" onclick="switchTab(this,'tab-officers')">Officers</button>
         <button class="tab-btn" onclick="switchTab(this,'tab-members')">Membership</button>
+        <button class="tab-btn" onclick="switchTab(this,'tab-patriots')">Our Patriots</button>
       </div>
 
       <div id="tab-history" class="tab-content active">
@@ -1129,8 +1129,8 @@
             <p style="line-height:1.8;">Every year, our chapter marches in the annual Palm Springs Veterans Day Parade in honor of our heroic Veterans. We march with a horse-drawn carriage and dressed in Continental Army Uniforms showing our appreciation for our Veterans.</p>
           </div>
         </div>
-        <p style="max-width:740px; line-height:1.9; margin-bottom:16px;">The Coachella Valley Chapter welcomes all those interested in the chapter's objectives to join them at their monthly meetings. The chapter meets on the third Friday of each month at 11:45 AM, October through May, at the Mission Hills Country Club in Rancho Mirage.</p>
-        <p style="max-width:740px; line-height:1.9;">For more information, please email us at <a href="mailto:coachellavalleysar@googlegroups.com" style="color:var(--red);">coachellavalleysar@googlegroups.com</a>.</p>
+        <p style="max-width:740px; line-height:1.9; margin-bottom:16px;">The Coachella Valley Chapter welcomes all those interested in the chapter's objectives to join them at their monthly meetings. The chapter meets on the third Friday of each month at 11:30 AM, October through May, at the Mission Hills Country Club in Rancho Mirage.</p>
+        <p style="max-width:740px; line-height:1.9;">For more information, please email us at <a href="/cdn-cgi/l/email-protection#67040806040f020b0b0611060b0b021e14061527000808000b020015081217144904080a" style="color:var(--red);"><span class="__cf_email__" data-cfemail="ed8e828c8e858881818c9b8c818188949e8c9fad8a82828a81888a9f82989d9ec38e8280">[email&#160;protected]</span></a>.</p>
       </div>
 
       <div id="tab-mission" class="tab-content">
@@ -1401,6 +1401,339 @@
         </div>
         <p style="margin-top:24px; font-size:0.82rem; color:#888; font-style:italic;">To update this list or report an error, please <a href="#" onclick="showPage('contact')" style="color:var(--red);">contact us</a>.</p>
       </div>
+
+      <!-- ── OUR PATRIOTS TAB ── -->
+      <div id="tab-patriots" class="tab-content">
+        <div class="section-label">★ &nbsp; Those Who Made Us Possible</div>
+        <h2 class="section-title">Our Patriots</h2>
+        <div class="title-rule"></div>
+
+        <style>
+          .patriots-intro {
+            max-width: 820px;
+            line-height: 1.9;
+            margin-bottom: 16px;
+          }
+          .patriots-project-note {
+            background: var(--light);
+            border-left: 4px solid var(--gold);
+            padding: 20px 24px;
+            margin-bottom: 36px;
+            max-width: 820px;
+            font-size: 0.93rem;
+            line-height: 1.85;
+            color: #444;
+          }
+          .service-categories {
+            max-width: 820px;
+            margin-bottom: 44px;
+          }
+          .service-categories h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--navy);
+            margin-bottom: 18px;
+          }
+          .service-cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+          }
+          .service-cat-item {
+            background: var(--white);
+            border: 1px solid #ddd5c0;
+            border-top: 3px solid var(--navy);
+            padding: 16px 18px;
+          }
+          .service-cat-item strong {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: .06em;
+            color: var(--red);
+            display: block;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+          }
+          .service-cat-item p {
+            font-size: 0.82rem;
+            color: #555;
+            line-height: 1.65;
+          }
+          /* Patriot bio cards */
+          .patriot-bio-list {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            max-width: 900px;
+          }
+          .patriot-bio {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 36px;
+            align-items: start;
+            background: var(--white);
+            border: 1px solid #ddd5c0;
+            border-top: 4px solid var(--gold);
+            padding: 28px 28px;
+            box-shadow: 0 2px 12px rgba(10,26,60,.06);
+          }
+          @media (max-width: 680px) {
+            .patriot-bio { grid-template-columns: 1fr; }
+          }
+          .patriot-bio-img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            border: 1px solid #ccc;
+          }
+          .patriot-bio-img-placeholder {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, var(--navy), var(--red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,.3);
+            font-size: 3rem;
+          }
+          .patriot-bio-content {}
+          .patriot-bio-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 4px;
+            line-height: 1.3;
+          }
+          .patriot-bio-rank {
+            font-family: 'Cinzel', serif;
+            font-size: 0.68rem;
+            letter-spacing: .12em;
+            color: var(--red);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: block;
+          }
+          .patriot-bio-text {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: #333;
+          }
+          .patriot-bio-text p {
+            margin-bottom: 12px;
+          }
+          .patriot-bio-member {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid #e0d9cc;
+            font-family: 'Cinzel', serif;
+            font-size: 0.68rem;
+            letter-spacing: .08em;
+            color: #888;
+            text-transform: uppercase;
+          }
+          .patriot-bio-member span {
+            color: var(--navy);
+            font-weight: 600;
+          }
+          .patriots-section-divider {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: .2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            text-align: center;
+            margin: 20px 0 0;
+          }
+        </style>
+
+        <p class="patriots-intro">This is an ongoing project. To help bring our Patriots to life, we have asked our members to provide a picture of themselves at the same age their Patriot served. With the help of AI, we have transformed them into the likeness of their ancestors, endeavoring to represent them in appropriate uniform or dress given their ancestor's type of patriotic service.</p>
+
+        <div class="patriots-project-note">
+          AI is not perfect, and there are discrepancies in the renderings. Some people might criticize this effort — however, it is no different than dressing in Colonial uniform, which we do throughout the year at various events. It also helps us connect with our ancestors: it makes us think about what their life was like and how young or old they might have been when they offered service to our country.
+        </div>
+
+        <div class="service-categories">
+          <h3>Forms of Patriotic Service</h3>
+          <div class="service-cat-grid">
+            <div class="service-cat-item">
+              <strong>Militia Service</strong>
+              <p>Perhaps the most common type of military service — men enlisted in local militias that fought with guerrilla tactics alongside the Continental Army, guarded prisoners, and protected essential supplies or refugees.</p>
+            </div>
+            <div class="service-cat-item">
+              <strong>Continental Service</strong>
+              <p>Troops in the Continental Army were highly trained professional soldiers with the full backing of the Continental Congress, taking the lead in the battle for Independence.</p>
+            </div>
+            <div class="service-cat-item">
+              <strong>Juror</strong>
+              <p>A general term referring to service in the Continental Government — from Justice of the Peace to Representatives at the Continental Congress. By serving, the Colonies could continue to function outside British rule.</p>
+            </div>
+            <div class="service-cat-item">
+              <strong>Supplies or Supply Tax</strong>
+              <p>By providing supplies or paying a supply tax, these Patriots funded the Revolutionary War effort. Contributing was risky — should the war not go well, the consequences were severe.</p>
+            </div>
+            <div class="service-cat-item">
+              <strong>Oath of Allegiance</strong>
+              <p>By pledging an Oath of Allegiance to America, colonists put their lives and property in jeopardy should the British prevail.</p>
+            </div>
+            <div class="service-cat-item">
+              <strong>Deprivation</strong>
+              <p>Loss of property due to the conflict at the hands of the British — including destruction of homes, farmland, or confiscation of assets such as crops or livestock.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="patriots-section-divider">★ &nbsp; Our Chapter's Patriot Ancestors &nbsp; ★</div>
+
+        <div class="patriot-bio-list" style="margin-top:36px;">
+
+          <!-- Jeremiah Brann -->
+          <div class="patriot-bio">
+            <img class="patriot-bio-img" src="image3.jpg" alt="Jeremiah Brann"/>
+            <div class="patriot-bio-content">
+              <div class="patriot-bio-name">Jeremiah Brann</div>
+              <span class="patriot-bio-rank">Private · Virginia Militia</span>
+              <div class="patriot-bio-text">
+                <p>Born about 1762 in Westmoreland County, VA, he enlisted as a Private in 1778 at the age of 16, and again in 1780 at age 18. In the Southern Campaign he fought at Guilford Court House, Hobkirk's Hill, the Siege of Ninety-Six, and Eutaw Springs, where he was "slightly wounded" and saw no further action.</p>
+                <p>He married Sarah Reeder on 20 March 1788 in Hampshire City, VA. In December 1788 they arrived in the new Ohio Territory settlement of Columbia — later to become Cincinnati — with Sarah's father and uncles and their families. Their child, Vincent, was the first child born in the new settlement on 26 October 1791.</p>
+                <p>Jeremiah and his son Vincent served together in the War of 1812. He made the first successful Revolutionary War Bounty Land Claim in Ohio Territory in 1817.</p>
+                <p>Jeremiah died 27 July 1834 in Butler County, OH, and is interred at Van Lue Cemetery, Ross Township, Butler County, OH.</p>
+              </div>
+              <div class="patriot-bio-member">Chapter Members: <span>David Jeffrey Arthurs, David Lee Arthurs (memorial), James Leonard Kearin</span></div>
+            </div>
+          </div>
+
+          <!-- Jacob and Mary Armfield Brown -->
+          <div class="patriot-bio">
+            <img class="patriot-bio-img" src="image5.jpg" alt="Jacob and Mary Armfield Brown"/>
+            <div class="patriot-bio-content">
+              <div class="patriot-bio-name">Jacob &amp; Mary Armfield Brown</div>
+              <span class="patriot-bio-rank">Private · North Carolina Militia</span>
+              <div class="patriot-bio-text">
+                <p>Born 04 January 1755. Full biography coming soon.</p>
+              </div>
+              <div class="patriot-bio-member">Biography in progress</div>
+            </div>
+          </div>
+
+          <!-- David Haymaker -->
+          <div class="patriot-bio">
+            <img class="patriot-bio-img" src="image9.jpg" alt="David Haymaker"/>
+            <div class="patriot-bio-content">
+              <div class="patriot-bio-name">David Haymaker</div>
+              <span class="patriot-bio-rank">Private · Pennsylvania Militia</span>
+              <div class="patriot-bio-text">
+                <p>Born about 1752 in Lancaster County, PA, David enlisted as a Private in the PA Militia in 1782.</p>
+                <p>He married Ann Herr before 1780 and later married Mary Stout. David and Ann had a son, Samuel Hamacker, born 22 January 1790 in VA.</p>
+                <p>David died after 1810 in Augusta, VA.</p>
+              </div>
+              <div class="patriot-bio-member">Chapter Members: <span>Thomas Foerster, Timothy Foerster</span></div>
+            </div>
+          </div>
+
+          <!-- Hercules Mooney -->
+          <div class="patriot-bio">
+            <img class="patriot-bio-img" src="image8.jpg" alt="Hercules Mooney"/>
+            <div class="patriot-bio-content">
+              <div class="patriot-bio-name">Hercules Mooney</div>
+              <span class="patriot-bio-rank">Colonel · New Hampshire Militia &amp; Continental Army</span>
+              <div class="patriot-bio-text">
+                <p>Born about 1710 in County Offaly, Ireland, Hercules Mooney enlisted as a Major in 1776. A veteran of the French-Indian War, he then served as a Lieutenant Colonel in the NH Militia. He fought at Fort Anne, Trenton, Princeton, and Ticonderoga, and was promoted to Colonel in 1779. He helped with the defense of Rhode Island until 1780.</p>
+                <p>He was a schoolmaster in Dover, NH, and married Elizabeth Evans and later Mary Spencer Jones.</p>
+                <p>After the war, Hercules moved to Holderness, NH, where he served as a Justice of the Peace for Grafton County and for the New Hampshire General Court.</p>
+                <p>Hercules died in April 1800 at Holderness, Grafton County, NH.</p>
+              </div>
+              <div class="patriot-bio-member">Chapter Member: <span>Christopher Joseph Cerillo</span></div>
+            </div>
+          </div>
+
+          <!-- Richard Opdycke -->
+          <div class="patriot-bio">
+            <img class="patriot-bio-img" src="image2.jpg" alt="Richard Opdycke"/>
+            <div class="patriot-bio-content">
+              <div class="patriot-bio-name">Richard Opdycke</div>
+              <span class="patriot-bio-rank">Private &amp; Juror</span>
+              <div class="patriot-bio-text">
+                <p>Born in 1740 at Bethlehem, Hunterdon County, NJ, Richard served as a Juror in cases against British Loyalists in 1778 at Lebanon, Hunterdon County, NJ.</p>
+                <p>Richard married Grace Thatcher in 1776 at Hunterdon County, NJ. They had a son, Benjamin Opdyke.</p>
+                <p>Richard died before 09 June 1825 at Kingwood, Hunterdon County, NJ, and is interred at Sutton Farm, Hunterdon County, NJ.</p>
+              </div>
+              <div class="patriot-bio-member">Chapter Member: <span>Barry Opdyke</span></div>
+            </div>
+          </div>
+
+          <!-- John Pardee -->
+          <div class="patriot-bio">
+            <img class="patriot-bio-img" src="image4.jpg" alt="John Pardee"/>
+            <div class="patriot-bio-content">
+              <div class="patriot-bio-name">John Pardee</div>
+              <span class="patriot-bio-rank">Corporal · Connecticut Militia</span>
+              <div class="patriot-bio-text">
+                <p>Born 28 May 1737 at Greenwich, Fairfield County, CT, he enlisted 28 January 1777 as a Corporal serving Captain Jonathan Whitney's 9th Regiment CT Militia at the age of 40.</p>
+                <p>During his service he helped lay a chain across the Hudson River and fired upon British boats from the bluff overlooking the river.</p>
+                <p>Prior to his enlistment, he married Sarah Webb 23 January 1766 in Stamford, Fairfield, CT. They had a son, Joseph, born 24 February 1778 at Stamford, Fairfield County, CT.</p>
+                <p>John died 26 April 1808 at Cortlandt, Westchester County, NY, and is interred at the First Presbyterian Church Cemetery at Yorktown, Westchester County, NY.</p>
+              </div>
+              <div class="patriot-bio-member">Chapter Members: <span>Brennan James Pardee, James Anthony Pardee</span></div>
+            </div>
+          </div>
+
+          <!-- John Post -->
+          <div class="patriot-bio">
+            <img class="patriot-bio-img" src="image7.jpg" alt="John Post"/>
+            <div class="patriot-bio-content">
+              <div class="patriot-bio-name">John Post</div>
+              <span class="patriot-bio-rank">Quartermaster · New York Continental Army</span>
+              <div class="patriot-bio-text">
+                <p>Born Johannes/John Post on 01 January 1749 at Schenectady, Schenectady County, NY, he enlisted in 1776, serving as Commissary and Quartermaster for the duration of the war with the NY Continental Army.</p>
+                <p>John was a close friend and colleague of General George Washington. A smart businessman, he managed the difficult logistics required to keep an army equipped and fed, often with limited resources.</p>
+                <p>As an officer in the Continental Army for the duration of the war, John Post is a member of the Society of the Cincinnati.</p>
+                <p>John married Margarietja/Margaretta Bellinger on 07 January 1779 at Pompton Plains, NJ, while in camp with the Continental Army. They had a daughter, Maria, born 08 January 1786 at Schenectady, Schenectady County, NY.</p>
+                <p>John died 06 December 1830 at Jamesville, Onondaga County, NY, and is interred at Walnut Grove Cemetery, Jamesville, Onondaga County, NY.</p>
+              </div>
+              <div class="patriot-bio-member">Chapter Member: <span>Anthony Glenn Hoskins</span></div>
+            </div>
+          </div>
+
+          <!-- William Rowntree -->
+          <div class="patriot-bio">
+            <img class="patriot-bio-img" src="image6.jpg" alt="William Rowntree"/>
+            <div class="patriot-bio-content">
+              <div class="patriot-bio-name">William Rowntree</div>
+              <span class="patriot-bio-rank">Sergeant · Virginia Militia</span>
+              <div class="patriot-bio-text">
+                <p>Born 03 January 1763 at Goochland County, VA, he enlisted at the young age of 16 to guard prisoners of war at Abermarle, VA, until March or April 1781, when the prisoners were moved to Winchester, VA. He then guarded refugees and magazines until his discharge in May 1781. Rowntree entered service as a Private and was promoted to Sergeant before his discharge.</p>
+                <p>His wife's name is unknown. They had a son, William C. Rountree, born about 1808 in VA.</p>
+                <p>Rowntree died 25 February 1852 at Henrico County, VA.</p>
+              </div>
+              <div class="patriot-bio-member">Chapter Member: <span>Dr. Kenneth Thomas Vick II</span></div>
+            </div>
+          </div>
+
+          <!-- Charles Skaggs -->
+          <div class="patriot-bio">
+            <img class="patriot-bio-img" src="image1.jpg" alt="Charles Skaggs the Longhunter"/>
+            <div class="patriot-bio-content">
+              <div class="patriot-bio-name">Charles Skaggs, the Longhunter</div>
+              <span class="patriot-bio-rank">Private, VA Frontier · Oath of Allegiance · Provided Supplies</span>
+              <div class="patriot-bio-text">
+                <p>Born about 1737, likely in Augusta County, VA. He was a contemporary and hunting companion of Daniel Boone in the Green River Valley of KY between 1770 and 1771.</p>
+                <p>Along with his brothers Richard and Henry, they blazed Skaggs Trace — a vital frontier trail that forked off from Daniel Boone's Wilderness Road. It ran from Hazel Patch to Crab Orchard, KY, and served as a major route for the later settlement of Kentucky.</p>
+                <p>Charles' military service was primarily focused on the VA frontier, protecting settlements from British-aligned tribal attacks.</p>
+                <p>The three brothers each had a nickname: Charles was the Longhunter, Henry was the Explorer, and Richard was the Sharpshooter — serving as a sharpshooter with Morgan's Riflemen at the Battle of Saratoga.</p>
+                <p>Charles died 22 January 1816 at Green County, KY.</p>
+              </div>
+              <div class="patriot-bio-member">Chapter Member: <span>Edward Neal Howell</span></div>
+            </div>
+          </div>
+
+        </div><!-- /patriot-bio-list -->
+
+        <p style="margin-top:36px; font-size:0.82rem; color:#888; font-style:italic;">This is an ongoing project. Additional Patriot biographies and portraits will be added as members contribute their family histories. If you are a chapter member and would like to participate, please <a href="#" onclick="showPage('contact')" style="color:var(--red);">contact us</a>.</p>
+      </div>
+
     </div>
   </section>
 </div><!-- /about -->
@@ -1555,6 +1888,22 @@
           </div>
         </div>
         <div class="event-item">
+          <div class="event-date"><span class="month">Sep</span><span class="day">18</span></div>
+          <div class="event-info">
+            <h4>Monthly Chapter Meeting</h4>
+            <p>Regular chapter business meeting and informational topics are presented. All members, prospects, and guests are invited to attend. We convene at 11:30am at the Mission Hills Country Club. There is a $35 fee for lunch served by the Country Club in the Dinah Shore Room. Tell the guard you are here for the SAR meeting to gain entrance. Valet parking is free.</p>
+            <span class="event-tag">Meeting</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="event-date"><span class="month">Oct</span><span class="day">16</span></div>
+          <div class="event-info">
+            <h4>Monthly Chapter Meeting</h4>
+            <p>Regular chapter business meeting and informational topics are presented. All members, prospects, and guests are invited to attend. We convene at 11:30am at the Mission Hills Country Club. There is a $35 fee for lunch served by the Country Club in the Dinah Shore Room. Tell the guard you are here for the SAR meeting to gain entrance. Valet parking is free.</p>
+            <span class="event-tag">Meeting</span>
+          </div>
+        </div>
+        <div class="event-item">
           <div class="event-date"><span class="month">Nov</span><span class="day">11</span></div>
           <div class="event-info">
             <h4>Veterans Day Parade – Palm Springs</h4>
@@ -1563,11 +1912,27 @@
           </div>
         </div>
         <div class="event-item">
+          <div class="event-date"><span class="month">Nov</span><span class="day">20</span></div>
+          <div class="event-info">
+            <h4>Monthly Chapter Meeting</h4>
+            <p>Regular chapter business meeting and informational topics are presented. All members, prospects, and guests are invited to attend. We convene at 11:30am at the Mission Hills Country Club. There is a $35 fee for lunch served by the Country Club in the Dinah Shore Room. Tell the guard you are here for the SAR meeting to gain entrance. Valet parking is free.</p>
+            <span class="event-tag">Meeting</span>
+          </div>
+        </div>
+        <div class="event-item">
           <div class="event-date"><span class="month">Dec</span><span class="day">13</span></div>
           <div class="event-info">
             <h4>National Wreaths Across America Day</h4>
             <p>Annual wreath-laying ceremony at Desert Memorial Park. Volunteers welcome. More details to follow.</p>
             <span class="event-tag">Community</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="event-date"><span class="month">Dec</span><span class="day">18</span></div>
+          <div class="event-info">
+            <h4>Monthly Chapter Meeting</h4>
+            <p>Regular chapter business meeting and informational topics are presented. All members, prospects, and guests are invited to attend. We convene at 11:30am at the Mission Hills Country Club. There is a $35 fee for lunch served by the Country Club in the Dinah Shore Room. Tell the guard you are here for the SAR meeting to gain entrance. Valet parking is free.</p>
+            <span class="event-tag">Meeting</span>
           </div>
         </div>
       </div>
@@ -1587,7 +1952,7 @@
       <div class="section-label">★ &nbsp; Eligibility</div>
       <h2 class="section-title">Who Can Join?</h2>
       <div class="title-rule"></div>
-      <p style="max-width:740px; line-height:1.9; margin-bottom:40px;">Membership in the Sons of the American Revolution is open to any male who is at least 18 years of age and can prove lineal descent from an ancestor who aided in achieving American independence. This includes service in the Continental Army, state militias, or in a patriotic civil capacity.</p>
+      <p style="max-width:740px; line-height:1.9; margin-bottom:40px;">Membership in the Sons of the American Revolution is open to any male who is at least 18 years of age and can prove lineal descent from an ancestor who aided in achieving American Independence. This includes service in the Continental Army, State Militias, by Oath of Allegiance, providing Supplies or Funds to the Cause, or in a Patriotic Civil capacity.</p>
       <div class="member-steps">
         <div class="step-card">
           <span class="step-num">01</span>
@@ -1607,8 +1972,9 @@
       </div>
       <div style="margin-top:50px; background:var(--light); padding:40px; border-left:4px solid var(--gold);">
         <h3 style="font-family:'Cinzel',serif; color:var(--navy); margin-bottom:14px;">Interested in Joining?</h3>
-        <p style="line-height:1.85; margin-bottom:20px;">Reach out to us and a chapter member will be glad to guide you through the application process. We welcome all eligible men who share a passion for American history and patriotism.</p>
-        <a href="#" class="btn btn-gold" onclick="showPage('contact')">Contact Us to Get Started</a>
+        <p style="line-height:1.85; margin-bottom:20px;">Reach out to us and a chapter member will be glad to guide you through the application process. We welcome all eligible men who share a passion for American History and Patriotism.</p>
+        <a href="#" class="btn btn-gold" onclick="showPage('contact')">Contact Us to Get Started</a>&nbsp;&nbsp;or&nbsp;&nbsp;
+        <a href="https://www.sar.org/how-to-apply/" class="btn btn-gold" target="_blank">Visit the National SAR Website</a>
       </div>
     </div>
   </section>
@@ -1657,21 +2023,29 @@
             <div class="contact-icon">📍</div>
             <div>
               <h4>Mailing Address</h4>
-              <p>Coachella Valley Chapter SAR<br/>Coachella Valley, California</p>
+              <p>Coachella Valley Chapter SAR<br/>2444 S. Sierra Madre<br/>
+              Palm Springs, CA 92264</p>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-icon">📅</div>
             <div>
               <h4>Monthly Meetings</h4>
-              <p>3rd Tuesday of every month<br/>Palm Desert Community Center<br/>6:30 PM</p>
+              <p>3rd Friday of the Month / September - May<br/>Mission Hills Country Club<br/>Rancho Mirage, California<br/>11:30 AM</p>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-icon">✉️</div>
             <div>
               <h4>Email</h4>
-              <p><a href="mailto:coachellavalleysar@googlegroups.com" style="color:var(--red);">coachellavalleysar@googlegroups.com</a></p>
+              <p><a href="/cdn-cgi/l/email-protection#d7b4b8b6b4bfb2bbbbb6a1b6bbbbb2aea4b6a597b0b8b8b0bbb2b0a5b8a2a7a4f9b4b8ba" style="color:var(--red);"><span class="__cf_email__" data-cfemail="395a56585a515c5555584f5855555c404a584b795e56565e555c5e4b564c494a175a5654">[email&#160;protected]</span></a></p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">🔗</div>
+            <div>
+              <h4>California Society SAR</h4>
+              <p><a href="https://www.californiasar.org" target="_blank" style="color:var(--red);">www.californiasar.org</a></p>
             </div>
           </div>
           <div class="contact-info-item">
@@ -1853,6 +2227,11 @@
         <li><a href="#" onclick="showPage('join')">Join SAR</a></li>
         <li><a href="#" onclick="showPage('donate')">Donate</a></li>
         <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+        <li><a href="https://cahuilla.californiadar.org" target="_blank">Cahuilla Chapter DAR (Sister Chapter)</a></li>
+        <li><a href="https://www.nscar.org/Default.aspx" target="_blank">Children of the American Revolution (NSCAR)</a></li>
+        <li><a href="https://www.dar.org" target="_blank">National DAR</a></li>
+        <li><a href="https://www.californiasar.org" target="_blank">California Society SAR</a></li>
+        <li><a href="https://www.sar.org" target="_blank">National SAR</a></li>
       </ul>
     </div>
     <div>
@@ -1898,7 +2277,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function sendEmail() {
     const name = document.querySelector('input[placeholder="John Adams"]').value;
     const subject = document.querySelector('select').value;
@@ -1915,15 +2294,34 @@
     }
   }
 
-  function toggleNav() {
-    document.getElementById('main-nav').classList.toggle('open');
+  function switchTab(btn, tabId) {
+    const page = btn.closest('.page');
+    if (!page) return;
+    page.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    page.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = document.getElementById(tabId);
+    if (tab) tab.classList.add('active');
   }
 
-  function switchTab(btn, tabId) {
-    btn.closest('.section-inner').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.closest('.section-inner').querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(tabId).classList.add('active');
+  function showPageTab(pageId, tabId) {
+    showPage(pageId);
+    setTimeout(function() {
+      const tab = document.getElementById(tabId);
+      if (!tab) return;
+      const page = tab.closest('.page');
+      if (!page) return;
+      page.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      page.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      const btn = page.querySelector('.tab-btn[onclick*="' + tabId + '"]');
+      if (btn) btn.classList.add('active');
+      tab.classList.add('active');
+    }, 50);
+  }
+
+  function toggleNav() {
+    const nav = document.getElementById('main-nav');
+    if (nav) nav.classList.toggle('open');
   }
 </script>
 </body>
